@@ -21,19 +21,19 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn test'
-                junit 'target/surefire-reports/*.xml'
             }
         }
         stage('Build') {
             steps {
                 sh 'mvn package -DskipTests'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
     }
     post {
         always {
             echo 'I will always say Hello World again !!!'
+            junit 'target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
