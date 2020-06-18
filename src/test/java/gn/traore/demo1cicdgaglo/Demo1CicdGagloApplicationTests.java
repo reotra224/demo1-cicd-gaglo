@@ -23,7 +23,7 @@ class Demo1CicdGagloApplicationTests {
 	void assertThatOnePlusTwoIsThree() {
 		int somme = 1 + 2;
 		assertThat(somme).isNotNull();
-		assertThat(somme).isEqualTo(3);
+		assertThat(somme).isEqualTo(2);
 	}
 
 }
