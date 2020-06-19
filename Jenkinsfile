@@ -28,6 +28,11 @@ pipeline {
                 sh 'mvn package -DskipTests'
             }
         }
+        stage('Sanity check') {
+            steps {
+                input "Est-ce que tout est OK ?"
+            }
+        }
     }
     post {
         always {
