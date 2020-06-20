@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-                sh 'docker build -t yrosman/test-cicd-gaglo:v1.0.0 .'
+                sh "docker build -t yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER} ."
             }
         }
         stage('Sanity check') {
@@ -47,7 +47,7 @@ pipeline {
                         echo '[ERROR] => Error de suppression du container'
                     }
                 }
-                sh 'docker run --name test-cicd -d -p 8081:8081 yrosman/test-cicd-gaglo:v1.0.0'
+                sh "docker run --name test-cicd -d -p 8081:8081 yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER}"
             }
         }
     }
