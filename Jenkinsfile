@@ -33,7 +33,7 @@ pipeline {
                 sh "docker build -t yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER} ."
             }
         }
-        stage('Sanity check') {
+        /*stage('Sanity check') {
             steps {
                 input "Voulez-vous lancer l'image docker ?"
             }
@@ -48,6 +48,14 @@ pipeline {
                     }
                 }
                 sh "docker run --name test-cicd -d -p 8081:8081 yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER}"
+            }
+        }*/
+        stage('Push docker image to the Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker push yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER}"
+                }
             }
         }
     }
