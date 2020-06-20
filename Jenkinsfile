@@ -28,14 +28,20 @@ pipeline {
                 sh 'mvn package -DskipTests'
             }
         }
-        stage('Sanity check') {
-            steps {
-                input "Est-ce que tout est OK ?"
-            }
-        }
         stage('Build docker image') {
             steps {
                 sh 'docker build -t yrosman/test-cicd-gaglo:v1.0.0 .'
+            }
+        }
+        stage('Sanity check') {
+            steps {
+                input "Voulez-vous lancer l'image docker ?"
+            }
+        }
+        stage('Running docker image') {
+            steps {
+                sh 'docker rm -f test-cicd'
+                sh 'docker run --name test-cicd -d -p 8081:8081 yrosman/test-cicd-gaglo:v1.0.0'
             }
         }
     }
