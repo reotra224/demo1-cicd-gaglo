@@ -40,7 +40,13 @@ pipeline {
         }
         stage('Running docker image') {
             steps {
-                sh 'docker rm -f test-cicd'
+                script{
+                    try{
+                        sh 'docker rm -f test-cicd'
+                    } catch(exc) {
+                        echo '[ERROR] => Error de suppression du container'
+                    }
+                }
                 sh 'docker run --name test-cicd -d -p 8081:8081 yrosman/test-cicd-gaglo:v1.0.0'
             }
         }
