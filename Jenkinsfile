@@ -33,6 +33,11 @@ pipeline {
                 input "Est-ce que tout est OK ?"
             }
         }
+        stage('Build docker image') {
+            steps {
+                sh 'docker build -t yrosman/test-cicd-gaglo:v1.0.0 .'
+            }
+        }
     }
     post {
         always {
