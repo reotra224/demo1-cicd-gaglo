@@ -33,6 +33,11 @@ pipeline {
                 sh "docker build -t yrosman/test-cicd-gaglo:v1.0.${BUILD_NUMBER} ."
             }
         }
+        stage('Analyse du code') {
+            withSonarQubeEnv('sonar') {
+                sh "./mvnw -ntp initialize sonar:sonar"
+            }
+        }
         /*stage('Sanity check') {
             steps {
                 input "Voulez-vous lancer l'image docker ?"
