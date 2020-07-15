@@ -34,8 +34,10 @@ pipeline {
             }
         }
         stage('Analyse du code') {
-            withSonarQubeEnv('sonar') {
-                sh "./mvnw -ntp initialize sonar:sonar"
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh "./mvnw -ntp initialize sonar:sonar"
+                }
             }
         }
         /*stage('Sanity check') {
