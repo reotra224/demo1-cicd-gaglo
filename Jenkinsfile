@@ -35,8 +35,8 @@ pipeline {
         }
         stage('Analyse du code') {
             steps {
-                withSonarQubeEnv('sonar') {
-                    sh "mvn -ntp initialize sonar:sonar"
+                withSonarQubeEnv('sonar-server') {
+                    sh "mvn sonar:sonar"
                 }
             }
         }
