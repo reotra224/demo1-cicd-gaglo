@@ -5,12 +5,16 @@ stages:
       image: maven:3.6.3-adoptopenjdk-11
       shellScript: |-
         mvn clean install
-- name: Publish
+- name: Publish Image
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: yrosman/example-demo1-cicd:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
+      registry: https://index.docker.io/v1/
+    env:
+      PLUGIN_INSECURE: "true"
 - name: Deploy
   steps:
   - applyYamlConfig:
