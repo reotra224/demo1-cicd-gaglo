@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo1-cicd-service
+spec:
+  selector:
+    app: demo1-cicd
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8083
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-demo1-cicd
+  labels:
+    app: demo1-cicd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo1-cicd
+  template:
+    metadata:
+      labels:
+        app: demo1-cicd
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-pipeline
+      containers:
+      - name: demo1-cicd
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 8083
