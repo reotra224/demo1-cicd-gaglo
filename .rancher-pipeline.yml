@@ -12,7 +12,7 @@ stages:
       buildContext: .
       tag: yrosman/example-demo1-cicd:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
-      registry: https://index.docker.io/v1/
+      registry: index.docker.io
       imagePushSecretName: docker-registry-pipeline
     env:
       PLUGIN_INSECURE: "true"
