@@ -28,6 +28,7 @@ spec:
     metadata:
       labels:
         app: demo1-cicd
+    namespace: develop
     spec:
       imagePullSecrets:
       - name: docker-registry-pipeline
