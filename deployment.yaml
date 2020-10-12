@@ -33,7 +33,8 @@ spec:
       restartPolicy: Always
       containers:
       - name: demo1-cicd
-        image: yrosman/example-demo1-cicd:${CICD_EXECUTION_SEQUENCE}
+        # image: yrosman/example-demo1-cicd:${CICD_EXECUTION_SEQUENCE}
+        image: yrosman/example-demo1-cicd:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8083
