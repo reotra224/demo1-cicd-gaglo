@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: demo1-cicd-service
-  namespace: develop
 spec:
   selector:
     app: demo1-cicd
@@ -16,9 +15,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: example-demo1-cicd
+  namespace: develop
   labels:
     app: demo1-cicd
-  namespace: develop
 spec:
   replicas: 1
   selector:
@@ -28,7 +27,6 @@ spec:
     metadata:
       labels:
         app: demo1-cicd
-    namespace: develop
     spec:
       imagePullSecrets:
       - name: docker-registry-pipeline
