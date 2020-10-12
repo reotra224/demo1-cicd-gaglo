@@ -31,8 +31,10 @@ spec:
     spec:
       imagePullSecrets:
       - name: docker-registry-pipeline
+      restartPolicy: Always
       containers:
       - name: demo1-cicd
         image: yrosman/example-demo1-cicd:${CICD_EXECUTION_SEQUENCE}
+        imagePullPolicy: Always
         ports:
         - containerPort: 8083
